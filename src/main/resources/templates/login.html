@@ -7,13 +7,30 @@
 </head>
 <body>
 <th:block th:insert="frags.html::bts_body(~{::div}, 'Sign in')">
+
     <div>
-<form th:action="@{/login}" method="post">
-    <div><label> Username : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<a th:href="@{/register}">Don't have an account yet? Sign up!</a>
+        <div th:each="tparam:${param}">
+            <div class="border p-1">
+                <p th:text="${tparam.getKey()}"></p>
+                <div class="border p-1" th:each="ttparam:${tparam.getValue()}">
+                    <p th:text="${ttparam}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div><label> Username : <input type="text" name="username"/> </label></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
+        <a th:href="@{/register}">Don't have an account yet? Sign up!</a>
     </div>
 </th:block>
 </body>

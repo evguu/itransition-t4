@@ -10,7 +10,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private Boolean isActive;
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -37,10 +37,24 @@ public class User {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "usr_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
 }
