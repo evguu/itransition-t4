@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -21,9 +22,7 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        System.out.println(username);
+        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();*/
         return "index";
     }
 
@@ -33,7 +32,7 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String addUser(String username, String password, String repeatPassword, Map<String, Object> model) {
+    public String addUser(String username, String name, String password, String repeatPassword, Map<String, Object> model) {
         User userFromDb = userRepository.findByUsername(username);
 
         if (userFromDb != null) {
@@ -49,8 +48,11 @@ public class MainController {
 
         User user = new User();
         user.setUsername(username);
+        user.setName(name);
         user.setPassword(password);
         user.setActive(true);
+        user.setRegistrationDate(new Date());
+        user.setLastLogin(new Date());
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
 

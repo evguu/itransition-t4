@@ -12,7 +12,9 @@
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/}">Task 4</a>
         <th:block sec:authorize="isAuthenticated()">
-            <p class="navbar-text" th:text="${#authentication.getName()}"></p>
+            <p class="navbar-text">
+                @<span sec:authentication="name"></span>
+            </p>
 
             <form th:action="@{/logout}" method="post">
                 <input class="button" type="submit" value="Log out"/>
