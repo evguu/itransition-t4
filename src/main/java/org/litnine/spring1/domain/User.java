@@ -24,8 +24,7 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private Date registrationDate;
-    private Date lastLogin;
-    private String status;
+    private Date lastLoginDate;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "usr_id"))

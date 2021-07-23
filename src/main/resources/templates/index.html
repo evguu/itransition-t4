@@ -13,7 +13,40 @@
         <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
     </div>
     <div sec:authorize="isAuthenticated()">
-        <p>Site content will be right here.</p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">
+                    <label>
+                        <input type="checkbox" value="">
+                    </label>
+                </th>
+                <th scope="col" style="font-size: 13px">Id</th>
+                <th scope="col" style="font-size: 13px">Username</th>
+                <th scope="col" style="font-size: 13px">Name</th>
+                <th scope="col" style="font-size: 13px">Email</th>
+                <th scope="col" style="font-size: 13px">Registration date</th>
+                <th scope="col" style="font-size: 13px">Last login date</th>
+                <th scope="col" style="font-size: 13px">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${users}">
+                <th scope="col">
+                    <label>
+                        <input type="checkbox" value="">
+                    </label>
+                </th>
+                <td class="text-truncate" style="font-size: 13px" th:text="${user.getId()}"></td>
+                <td class="text-truncate" style="font-size: 13px" th:text="${user.getUsername()}"></td>
+                <td class="text-truncate" style="font-size: 13px" th:text="${user.getName()}"></td>
+                <td class="text-truncate" style="font-size: 13px" th:text="${user.getEmail()}"></td>
+                <td class="text-truncate" style="max-width: 1vw;font-size: 13px" th:text="${user.getRegistrationDate()}"></td>
+                <td class="text-truncate" style="max-width: 1vw;font-size: 13px" th:text="${user.getLastLoginDate()}"></td>
+                <td class="text-truncate" style="font-size: 13px" th:text="${user.getActive()}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </th:block>
 </body>

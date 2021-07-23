@@ -26,6 +26,7 @@ public class MainController {
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
         /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();*/
+        model.put("users", userRepository.findAll());
         return "index";
     }
 
@@ -66,7 +67,7 @@ public class MainController {
         user.setEmail(userDto.getEmail());
         user.setActive(true);
         user.setRegistrationDate(new Date());
-        user.setLastLogin(new Date());
+        user.setLastLoginDate(new Date());
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
 
