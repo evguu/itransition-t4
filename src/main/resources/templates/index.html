@@ -6,7 +6,7 @@
     <title>Index page</title>
 </head>
 <body>
-<th:block th:insert="frags.html::bts_body(~{::div})">
+<th:block th:insert="frags.html::bts_body(~{::div}, 'Index')">
     <div>
         <p>You can either sign in or sign up to access the website contents.</p>
         <a th:href="@{/login}" class="btn btn-outline-primary">Sign in</a>
