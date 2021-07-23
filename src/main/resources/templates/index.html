@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="frags.html::bts_head"></th:block>
     <meta charset="UTF-8">
@@ -7,10 +7,13 @@
 </head>
 <body>
 <th:block th:insert="frags.html::bts_body(~{::div}, 'Index')">
-    <div>
+    <div sec:authorize="!isAuthenticated()">
         <p>You can either sign in or sign up to access the website contents.</p>
         <a th:href="@{/login}" class="btn btn-outline-primary">Sign in</a>
         <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <p>Site content will be right here.</p>
     </div>
 </th:block>
 </body>
