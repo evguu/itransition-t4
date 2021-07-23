@@ -4,6 +4,8 @@ import org.litnine.spring1.domain.Role;
 import org.litnine.spring1.domain.User;
 import org.litnine.spring1.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,9 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println(username);
         return "index";
     }
 
