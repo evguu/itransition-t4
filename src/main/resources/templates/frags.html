@@ -4,8 +4,26 @@
   <meta charset="UTF-8" />
   <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
-<body th:fragment="bts_body">
+<body th:fragment="bts_body(content)" style="padding-top: 65px;">
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.js}"></script>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/index}">Task 4</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="bg-light p-5 rounded border">
+    <p align="center"><b>{% block title %}{% endblock title %}</b></p>
+    <hr>
+    <div th:replace="${content}"></div>
+  </div>
+</main>
+
 </body>
 </html>

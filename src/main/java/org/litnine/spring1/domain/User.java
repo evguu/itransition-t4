@@ -10,6 +10,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    private Boolean isActive;
 
     public Long getId() {
         return id;
@@ -33,5 +34,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
