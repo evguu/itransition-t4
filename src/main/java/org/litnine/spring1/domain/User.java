@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private Boolean active;
 
     private String name;
+    private String email;
     private Date registrationDate;
     private Date lastLogin;
     private String status;
