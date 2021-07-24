@@ -13,13 +13,11 @@
         <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
     </div>
     <div sec:authorize="isAuthenticated()">
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-bordered table-sm table-hover">
+            <thead class="thead-light">
             <tr>
                 <th scope="col">
-                    <label>
-                        <input type="checkbox" value="">
-                    </label>
+                    <input type="checkbox" value="">
                 </th>
                 <th scope="col" style="font-size: 13px">Id</th>
                 <th scope="col" style="font-size: 13px">Username</th>
@@ -27,15 +25,13 @@
                 <th scope="col" style="font-size: 13px">Email</th>
                 <th scope="col" style="font-size: 13px">Registration date</th>
                 <th scope="col" style="font-size: 13px">Last login date</th>
-                <th scope="col" style="font-size: 13px">Status</th>
+                <th scope="col" style="font-size: 13px">Is active</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user:${users}">
                 <th scope="col">
-                    <label>
-                        <input type="checkbox" value="">
-                    </label>
+                    <input type="checkbox" value="">
                 </th>
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getId()}"></td>
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getUsername()}"></td>
@@ -47,6 +43,8 @@
             </tr>
             </tbody>
         </table>
+
+        <script th:src="@{/js/index.js}"></script>
     </div>
 </th:block>
 </body>
