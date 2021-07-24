@@ -8,6 +8,6 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 public class IndexArrDto {
-    Collection<Integer> indexes;
+    Collection<Long> indexes;
     String action;
 }

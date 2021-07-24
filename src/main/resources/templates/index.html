@@ -15,7 +15,9 @@
         <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
     </div>
     <div sec:authorize="isAuthenticated()">
-
+        <script th:if="${suicide}">
+            window.location.replace("logout");
+        </script>
         <div class="row">
             <div class="btn-group mb-3 " style="position: relative;left: 100%;transform: translateX(-112%);">
                 <button type="button" class="btn btn-outline-secondary">
@@ -37,13 +39,13 @@
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col" style="font-size: 13px">Id</th>
-                <th scope="col" style="font-size: 13px">Username</th>
-                <th scope="col" style="font-size: 13px">Name</th>
-                <th scope="col" style="font-size: 13px">Email</th>
-                <th scope="col" style="font-size: 13px">Sign up date</th>
-                <th scope="col" style="font-size: 13px">Last login date</th>
-                <th scope="col" style="font-size: 13px">Is active</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Id</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Username</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Name</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Email</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Sign up date</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Last login date</th>
+                <th scope="col" data-sortable="true" style="font-size: 13px">Is active</th>
             </tr>
             </thead>
             <tbody>
@@ -61,7 +63,6 @@
             </tr>
             </tbody>
         </table>
-
         <script th:src="@{/js/index.js}"></script>
     </div>
 </th:block>

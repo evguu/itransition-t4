@@ -1,4 +1,4 @@
-package org.litnine.spring1.controlller;
+package org.litnine.spring1.controller;
 
 import org.litnine.spring1.domain.IndexArrDto;
 import org.litnine.spring1.domain.Role;
@@ -6,17 +6,16 @@ import org.litnine.spring1.domain.User;
 import org.litnine.spring1.domain.UserDto;
 import org.litnine.spring1.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.*;
-import javax.validation.valueextraction.ValueExtractor;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -26,7 +25,7 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
-        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();*/
+        model.put("suicide", isCurrentUserBannedOrDeleted());
         model.put("users", userRepository.findAll());
         return "index";
     }
@@ -43,7 +42,7 @@ public class MainController {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
 
-        if(violations.size() > 0){
+        if (violations.size() > 0) {
             model.put("message", "Either some field is not filled or email format is wrong.");
             return "register";
         }
@@ -55,8 +54,7 @@ public class MainController {
             return "register";
         }
 
-        if (!userDto.getPassword().equals(userDto.getRepeatPassword()))
-        {
+        if (!userDto.getPassword().equals(userDto.getRepeatPassword())) {
             model.put("message", "Passwords don't match.");
             return "register";
         }
@@ -75,11 +73,53 @@ public class MainController {
         return "redirect:/login";
     }
 
-    @PostMapping("/command")
-    public String command(IndexArrDto indexArrDto, Map<String, Object> model) {
-        for(Integer i: indexArrDto.getIndexes()) {
-            System.out.println(i);
-        }
+    @GetMapping("/logout")
+    public String getLogout(Map<String, Object> model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth.setAuthenticated(false);
         return "redirect:/login";
+    }
+
+    private boolean isCurrentUserBannedOrDeleted(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
+        if(user == null) return true;
+        return !user.getActive();
+    }
+
+    @PostMapping("/command")
+    public ResponseEntity<?> command(IndexArrDto indexArrDto, Map<String, Object> model) {
+
+        if(isCurrentUserBannedOrDeleted()){
+            return ResponseEntity.ok("{\"isLoggedOut\": true}");
+        }
+
+        if(indexArrDto.getIndexes() != null) {
+            for(Long id: indexArrDto.getIndexes()) {
+                Optional<User> ou = userRepository.findById(id);
+                if(ou.isPresent()) {
+                    User u = ou.get();
+                    switch (indexArrDto.getAction()) {
+                        case ("unblock"):
+                            u.setActive(true);
+                            userRepository.save(u);
+                            break;
+                        case ("block"):
+                            u.setActive(false);
+                            userRepository.save(u);
+                            break;
+                        case ("delete"):
+                            userRepository.deleteById(u.getId());
+                            break;
+                        default:
+                            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                    }
+                }
+            }
+        }
+        return ResponseEntity.ok("{\"isLoggedOut\": " +
+                (isCurrentUserBannedOrDeleted()?"true":"false")
+                + "}");
     }
 }
