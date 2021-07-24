@@ -1,5 +1,6 @@
 package org.litnine.spring1.controlller;
 
+import org.litnine.spring1.domain.IndexArrDto;
 import org.litnine.spring1.domain.Role;
 import org.litnine.spring1.domain.User;
 import org.litnine.spring1.domain.UserDto;
@@ -71,6 +72,14 @@ public class MainController {
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
 
+        return "redirect:/login";
+    }
+
+    @PostMapping("/command")
+    public String command(IndexArrDto indexArrDto, Map<String, Object> model) {
+        for(Integer i: indexArrDto.getIndexes()) {
+            System.out.println(i);
+        }
         return "redirect:/login";
     }
 }
