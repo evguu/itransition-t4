@@ -24,14 +24,10 @@
         <th:block sec:authorize="!isAuthenticated()">
             <p class="navbar-text">Not authorized.</p>
         </th:block>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </div>
 </nav>
 
-<main class="container">
+<main class="px-lg-5 px-sm-1">
     <div class="bg-light p-5 rounded border">
         <b><p align="center" th:text="${title}"></p></b>
         <hr>
