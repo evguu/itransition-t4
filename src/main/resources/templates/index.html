@@ -6,13 +6,30 @@
     <title>Index page</title>
 </head>
 <body>
-<th:block th:insert="frags.html::bts_body(~{::div}, 'Index')">
+<th:block th:insert="frags.html::bts_body(~{::div}, 'User table page')">
     <div sec:authorize="!isAuthenticated()">
+        <p>Unauthorized users don't have access to this page.</p>
+        <br>
         <p>You can either sign in or sign up to access the website contents.</p>
         <a th:href="@{/login}" class="btn btn-outline-primary">Sign in</a>
         <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
     </div>
     <div sec:authorize="isAuthenticated()">
+
+        <div class="row">
+            <div class="btn-group mb-3 " style="position: relative;left: 100%;transform: translateX(-112%);">
+                <button type="button" class="btn btn-outline-secondary">
+                    <img src="/img/unlock.svg" alt="Unblock" id="unblock" width="16" height="16">
+                </button>
+                <button type="button" class="btn btn-outline-secondary">
+                    <img src="/img/lock.svg" alt="Block" id="block" width="16" height="16">
+                </button>
+                <button type="button" class="btn btn-outline-secondary">
+                    <img src="/img/trash.svg" alt="Delete" id="delete" width="16" height="16">
+                </button>
+            </div>
+        </div>
+
         <table class="table table-bordered table-sm table-hover">
             <thead class="thead-light">
             <tr>
@@ -37,8 +54,10 @@
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getUsername()}"></td>
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getName()}"></td>
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getEmail()}"></td>
-                <td class="text-truncate" style="max-width: 1vw;font-size: 13px" th:text="${user.getRegistrationDate()}"></td>
-                <td class="text-truncate" style="max-width: 1vw;font-size: 13px" th:text="${user.getLastLoginDate()}"></td>
+                <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
+                    th:text="${user.getRegistrationDate()}"></td>
+                <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
+                    th:text="${user.getLastLoginDate()}"></td>
                 <td class="text-truncate" style="font-size: 13px" th:text="${user.getActive()}"></td>
             </tr>
             </tbody>
