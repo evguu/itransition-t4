@@ -1,42 +1,26 @@
 function getListOfCheckedRowIds(){
-    $(".table > tbody > tr").each((k,v) => {
+    return $("table").bootstrapTable('getSelections').map(e => e[1]);
+}
 
-        if($(v).prop('checked')) {
+function sendCommandWithCheckedIds(cmd){
+    $.ajax({
+        type: "POST",
+        url: 'command',
+        data: {indexes: getListOfCheckedRowIds(), action: cmd},
+        success: function (result) {
+            console.log(result);
         }
-
     });
-
 }
 
 $("#unblock").click(()=>{
-    $.ajax({
-        type: "POST",
-        url: 'command',
-        data: {indexes: [1, 2, 3, 4], action: "unblock"},
-        success: function (result) {
-            console.log(result);
-        }
-    });
+    sendCommandWithCheckedIds("unblock");
 });
 
 $("#block").click(()=>{
-    $.ajax({
-        type: "POST",
-        url: 'command',
-        data: {indexes: [1, 2, 3, 4], action: "block"},
-        success: function (result) {
-            console.log(result);
-        }
-    });
+    sendCommandWithCheckedIds("block");
 });
 
 $("#delete").click(()=>{
-    $.ajax({
-        type: "POST",
-        url: 'command',
-        data: {indexes: [1, 2, 3, 4], action: "delete"},
-        success: function (result) {
-            console.log(result);
-        }
-    });
+    sendCommandWithCheckedIds("delete");
 });
