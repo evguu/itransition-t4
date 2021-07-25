@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Login</title>
+  <link th:href="@{css/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{css/signin.css}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+<form class="form-signin rounded" th:action="@{/register}" method="post">
+
+  <h1 class="h3 mb-3 font-weight-normal text-light">Create new account</h1>
+
+  <div th:if="${message}" class="alert alert-warning text-light" role="alert">
+    <p th:text="${message}"></p>
+  </div>
+
+  <label for="username" class="sr-only">Username</label>
+  <input type="text" id="username" name="username" class="input--top form-control text-light" placeholder="Username" required="" autofocus="">
+
+  <label for="name" class="sr-only">Name</label>
+  <input type="text" id="name" name="name" class="input--middle form-control text-light" placeholder="Name" required="" autofocus="">
+
+  <label for="email" class="sr-only">E-mail</label>
+  <input type="text" id="email" name="email" class="input--middle form-control text-light" placeholder="E-mail" required="" autofocus="">
+
+  <label for="password" class="sr-only">Password</label>
+  <input type="password" id="password" name="password" class="input--middle form-control text-light" placeholder="Password" required="">
+
+  <label for="repeatPassword" class="sr-only">Repeat password</label>
+  <input type="password" id="repeatPassword" name="repeatPassword" class="input--bottom form-control text-light" placeholder="Repeat password" required="">
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  <p class="mt-5 mb-3 text-muted">
+    <a class="text-light" th:href="@{/login}">
+      Already have an account? Sign in!
+    </a>
+  </p>
+</form>
+
+
+</body></html>

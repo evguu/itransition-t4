@@ -37,7 +37,7 @@ public class MainController {
 
     @GetMapping("/register")
     public String register(Map<String, Object> model) {
-        return "register";
+        return "register_new";
     }
 
     @PostMapping("/register")
@@ -49,19 +49,19 @@ public class MainController {
 
         if (violations.size() > 0) {
             model.put("message", "Either some field is not filled or email format is wrong.");
-            return "register";
+            return "register_new";
         }
 
         User userFromDb = userRepository.findByUsername(userDto.getUsername());
 
         if (userFromDb != null) {
             model.put("message", "Username is already taken!");
-            return "register";
+            return "register_new";
         }
 
         if (!userDto.getPassword().equals(userDto.getRepeatPassword())) {
             model.put("message", "Passwords don't match.");
-            return "register";
+            return "register_new";
         }
 
         User user = new User();
