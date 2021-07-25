@@ -8,34 +8,36 @@
 <body>
 <th:block th:insert="frags.html::bts_body(~{::div}, 'User table page')">
     <div sec:authorize="!isAuthenticated()">
-        <p>Unauthorized users don't have access to this page.</p>
-        <br>
-        <p>You can either sign in or sign up to access the website contents.</p>
-        <a th:href="@{/login}" class="btn btn-outline-primary">Sign in</a>
-        <a th:href="@{/register}" class="btn btn-outline-primary">Sign up</a>
+        <div align="center">
+            <p>Unauthorized users don't have access to this page. <br>You can either sign in or sign up to access the website contents.</p>
+            <a th:href="@{/login}" class="btn btn-lg btn-outline-primary button-my text-light">Sign in</a>
+            <a th:href="@{/register}" class="btn btn-lg btn-outline-primary button-my text-light">Sign up</a>
+        </div>
     </div>
+
     <div sec:authorize="isAuthenticated()">
         <script th:if="${suicide}">
             window.location.replace("logout");
         </script>
-        <div class="row">
-            <div class="btn-group mb-3 " style="position: relative;left: 100%;transform: translateX(-112%);">
-                <button type="button" id="unblock" class="btn btn-outline-secondary">
-                    <img src="/img/unlock.svg" alt="Unblock" width="16" height="16">
+        <div>
+            <div class="btn-group input--top" style="position: relative;left: 100%;transform: translateX(-100%);">
+                <button type="button" id="unblock" class="btn btn-outline-secondary button-my">
+                    <img class="filter-white" src="/img/unlock.svg" alt="Unblock" width="16" height="16">
                 </button>
-                <button type="button" id="block" class="btn btn-outline-secondary">
-                    <img src="/img/lock.svg" alt="Block" width="16" height="16">
+                <button type="button" id="block" class="btn btn-outline-secondary button-my input--top">
+                    <img class="filter-white" src="/img/lock.svg" alt="Block" width="16" height="16">
                 </button>
-                <button type="button" id="delete" class="btn btn-outline-secondary">
-                    <img src="/img/trash.svg" alt="Delete" width="16" height="16">
+                <button type="button" id="delete" class="btn btn-outline-secondary button-my input--top">
+                    <img class="filter-white"  src="/img/trash.svg" alt="Delete" width="16" height="16">
                 </button>
             </div>
         </div>
 
+        <div class="content-weak">
         <table data-toggle="table"
-               data-toolbar="#toolbar"
                data-height="460"
-               data-click-to-select="true">
+               data-click-to-select="true"
+        class="content">
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
@@ -63,6 +65,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
         <script th:src="@{/js/index.js}"></script>
     </div>
 </th:block>

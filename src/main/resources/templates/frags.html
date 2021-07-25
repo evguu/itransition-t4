@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/css/bootstrap-table.css}" rel="stylesheet">
+    <link th:href="@{css/index.css}" rel="stylesheet">
 </head>
 <body th:fragment="bts_body(content, title)" style="padding-top: 65px;">
 <script th:src="@{/js/jquery.js}"></script>
@@ -19,7 +20,7 @@
             </p>
 
             <form th:action="@{/logout}" method="post">
-                <input class="button" type="submit" value="Log out"/>
+                <input class="button btn btn-outline-primary" type="submit" value="Log out"/>
             </form>
 
         </th:block>
@@ -30,8 +31,8 @@
 </nav>
 
 <main class="px-lg-5 px-sm-1">
-    <div class="bg-light p-5 rounded border">
-        <b><p align="center" th:text="${title}"></p></b>
+    <div class="content p-5 rounded text-light">
+        <b><h1 class="h3 mb-3 font-weight-normal text-light" align="center" th:text="${title}"></h1></b>
         <hr>
 
         <div th:replace="${content}"></div>
