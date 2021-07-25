@@ -9,13 +9,15 @@
 <th:block th:insert="frags.html::bts_body(~{::div}, 'User table page')">
     <div sec:authorize="!isAuthenticated()">
         <div align="center">
-            <p>Unauthorized users don't have access to this page. <br>You can either sign in or sign up to access the website contents.</p>
+            <p>Unauthorized users don't have access to this page. <br>You can either sign in or sign up to access the
+                website contents.</p>
             <a th:href="@{/login}" class="btn btn-lg btn-outline-primary button-my text-light">Sign in</a>
             <a th:href="@{/register}" class="btn btn-lg btn-outline-primary button-my text-light">Sign up</a>
         </div>
     </div>
 
     <div sec:authorize="isAuthenticated()">
+
         <script th:if="${suicide}">
             window.location.replace("logout");
         </script>
@@ -28,43 +30,43 @@
                     <img class="filter-white" src="/img/lock.svg" alt="Block" width="16" height="16">
                 </button>
                 <button type="button" id="delete" class="btn btn-outline-secondary button-my input--top">
-                    <img class="filter-white"  src="/img/trash.svg" alt="Delete" width="16" height="16">
+                    <img class="filter-white" src="/img/trash.svg" alt="Delete" width="16" height="16">
                 </button>
             </div>
         </div>
 
         <div class="content-weak">
-        <table data-toggle="table"
-               data-height="460"
-               data-click-to-select="true"
-        class="content">
-            <thead>
-            <tr>
-                <th data-checkbox="true"></th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Id</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Username</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Name</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Email</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Sign up date</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Last login date</th>
-                <th scope="col" data-sortable="true" style="font-size: 13px">Is active</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user:${users}">
-                <th data-checkbox="true"></th>
-                <td class="text-truncate" style="font-size: 13px" th:text="${user.getId()}"></td>
-                <td class="text-truncate" style="font-size: 13px" th:text="${user.getUsername()}"></td>
-                <td class="text-truncate" style="font-size: 13px" th:text="${user.getName()}"></td>
-                <td class="text-truncate" style="font-size: 13px" th:text="${user.getEmail()}"></td>
-                <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
-                    th:text="${user.getRegistrationDate()}"></td>
-                <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
-                    th:text="${user.getLastLoginDate()}"></td>
-                <td class="text-truncate" style="font-size: 13px" th:text="${user.getActive()}"></td>
-            </tr>
-            </tbody>
-        </table>
+            <table data-toggle="table"
+                   data-height="460"
+                   data-click-to-select="true"
+                   class="content">
+                <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Id</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Username</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Name</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Email</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Sign up date</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Last login date</th>
+                    <th scope="col" data-sortable="true" style="font-size: 13px">Is active</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <th data-checkbox="true"></th>
+                    <td class="text-truncate" style="font-size: 13px" th:text="${user.getId()}"></td>
+                    <td class="text-truncate" style="font-size: 13px" th:text="${user.getUsername()}"></td>
+                    <td class="text-truncate" style="font-size: 13px" th:text="${user.getName()}"></td>
+                    <td class="text-truncate" style="font-size: 13px" th:text="${user.getEmail()}"></td>
+                    <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
+                        th:text="${user.getRegistrationDate()}"></td>
+                    <td class="text-truncate" style="max-width: 1vw;font-size: 13px"
+                        th:text="${user.getLastLoginDate()}"></td>
+                    <td class="text-truncate" style="font-size: 13px" th:text="${user.getActive()}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <script th:src="@{/js/index.js}"></script>
     </div>
